@@ -5,9 +5,7 @@ services:
     container_name: asir-apache
     ports:
     - '80:80'
+    - '8000:8000'
     volumes:
     - ./html:/var/www/html
-    - confApache:/etc/apache2
-volumes:
-  confApache:
-  
+    - ./confApache:/etc/apache2
