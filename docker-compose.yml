@@ -6,6 +6,24 @@ services:
     ports:
     - '80:80'
     - '8000:8000'
+    networks:
+      proyectoApache_subnet:
+        ipv4_address: 10.1.0.253
     volumes:
     - ./html:/var/www/html
     - ./confApache:/etc/apache2
+  bind9:
+    container_name: asir_bind9_apache
+    image: internetsystemsconsortium/bind9:9.16
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+    networks:
+      proyectoApache_subnet:
+        ipv4_address: 10.1.0.254
+    volumes:
+      - /home/damian/proyectoApache/confDNS/config:/etc/bind
+      - /home/damian/proyectoApache/confDNS/zonas:/var/lib/bind
+networks:
+  proyectoApache_subnet: 
+    external: true
